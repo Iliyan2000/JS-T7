@@ -37,24 +37,36 @@ export default class Application extends EventEmitter {
     `;
   }
 
+  _loading = document.querySelector('progress');
+
   async _load()
   {
-    const url = 'https://swapi.boom.dev/api/planets';
+    let url = 'https://swapi.boom.dev/api/planets';
+    let planet_pages = [];
 
     let res = await fetch(url);
     let data = res.json();
-    this._create(data);
+    planet_pages.push(data);
+    for (let index = 2; index < 7; index++) {
+      url = 'https://swapi.boom.dev/api/planets?page=${index}';
+      res = await fetch(url);
+      data = res.json();
+      planet_pages.push(data);
+    }
+    this._create(planet_pages);
     this._stopLoading();
   }
 
   _create(response)
   {
-    response.forEach(element => {
-      const box = document.createElement("div");
-      box.classList.add("box");
-      box.innerHTML = this._render(element.name, element.terrain, element.population);  
-      document.body.querySelector(".main").appendChild(box);
-    });
+    for (let i = 0; i < response.length; i++) {
+      for (let j = 0; j < response[i].results.length; j++) {
+        const box = document.createElement("div");
+        box.classList.add("box");
+        box.innerHTML = this._render(element.name, element.terrain, element.population);  
+        document.body.querySelector(".main").appendChild(box);
+      }
+    }
   }
 
   _startLoading()
