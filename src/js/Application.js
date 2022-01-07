@@ -76,6 +76,6 @@ export default class Application extends EventEmitter {
 
   _stopLoading()
   {
-    _loading.setAttribute('hidden');
+    document.querySelector('.progress').style.display = "none";
   }
 }
