@@ -48,7 +48,7 @@ export default class Application extends EventEmitter {
     let data = res.json();
     planet_pages.push(data);
     for (let i = 2; i < 7; i++) {
-      url = 'https://swapi.boom.dev/api/planets?page=' + i.toString;
+      url = 'https://swapi.boom.dev/api/planets?page='.concat(i.toString());
       res = await fetch(url);
       data = res.json();
       planet_pages.push(data);
