@@ -12,6 +12,7 @@ export default class Application extends EventEmitter {
     super();
 
     this._load();
+    document.querySelector('.progress').style.display = "none";
 
     this.emit(Application.events.READY);
   }
@@ -54,7 +55,6 @@ export default class Application extends EventEmitter {
       planet_pages.push(data);
     }
     this._create(planet_pages);
-    this._stopLoading();
   }
 
   _create(response)
@@ -76,6 +76,6 @@ export default class Application extends EventEmitter {
 
   _stopLoading()
   {
-    document.querySelector('.progress').style.display = "none";
+
   }
 }
