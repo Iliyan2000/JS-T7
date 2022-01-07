@@ -47,8 +47,8 @@ export default class Application extends EventEmitter {
     let res = await fetch(url);
     let data = res.json();
     planet_pages.push(data);
-    for (let index = 2; index < 7; index++) {
-      url = 'https://swapi.boom.dev/api/planets?page=${index}';
+    for (let i = 2; i < 7; i++) {
+      url = 'https://swapi.boom.dev/api/planets?page=' + i.toString;
       res = await fetch(url);
       data = res.json();
       planet_pages.push(data);
@@ -76,7 +76,6 @@ export default class Application extends EventEmitter {
 
   _stopLoading()
   {
-    const bar = document.querySelector('progressbar');
-    bar.setAttribute('hidden');
+    _loading.setAttribute('hidden');
   }
 }
